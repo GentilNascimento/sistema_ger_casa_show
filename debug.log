@@ -1726,3 +1726,160 @@ Traceback (most recent call last):
   File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 50, in conninfo_attempts
     raise e.OperationalError(str(last_exc))
 django.db.utils.OperationalError: [Errno 11001] getaddrinfo failed
+Scheduler started
+Running job "enviar_mensagens_agendadas (trigger: interval[0:01:00], next run at: 2025-02-07 11:13:32 AEDT)" (scheduled at 2025-02-07 11:12:32.450200+11:00)
+Running job "verificar_status (trigger: interval[0:01:00], next run at: 2025-02-07 11:13:32 AEDT)" (scheduled at 2025-02-07 11:12:32.450200+11:00)
+Job "verificar_status (trigger: interval[0:01:00], next run at: 2025-02-07 11:13:32 AEDT)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 275, in ensure_connection
+    self.connect()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\postgresql\base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\connection.py", line 98, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 50, in conninfo_attempts
+    raise e.OperationalError(str(last_exc))
+psycopg.OperationalError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\artistas\tasks.py", line 80, in verificar_status
+    for artista in artistas:
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 275, in ensure_connection
+    self.connect()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\postgresql\base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\connection.py", line 98, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 50, in conninfo_attempts
+    raise e.OperationalError(str(last_exc))
+django.db.utils.OperationalError: [Errno 11001] getaddrinfo failed
+Job "enviar_mensagens_agendadas (trigger: interval[0:01:00], next run at: 2025-02-07 11:13:32 AEDT)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 275, in ensure_connection
+    self.connect()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\postgresql\base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\connection.py", line 98, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 50, in conninfo_attempts
+    raise e.OperationalError(str(last_exc))
+psycopg.OperationalError: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\artistas\tasks.py", line 43, in enviar_mensagens_agendadas
+    for artista in artistas:
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\models\sql\compiler.py", line 1560, in execute_sql
+    cursor = self.connection.cursor()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 275, in ensure_connection
+    self.connect()
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\base\base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\django\db\backends\postgresql\base.py", line 277, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\connection.py", line 98, in connect
+    attempts = conninfo_attempts(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\genti\OneDrive\Documentos\gestao_eventos\dhenv\Lib\site-packages\psycopg\_conninfo_attempts.py", line 50, in conninfo_attempts
+    raise e.OperationalError(str(last_exc))
+django.db.utils.OperationalError: [Errno 11001] getaddrinfo failed
