@@ -15,7 +15,7 @@ celerybeat-schedule
 dhenv/
 .env
 debug.log
-
+*.pyc
 
 
 
