@@ -14,25 +14,8 @@ celery
 celerybeat-schedule
 dhenv/
 .env
+debug.log
 
 
 
-
-
-login=gentil, senha=123vilce
- 
-
- 
-
-                     ''' (((ANTES DE ENVIAR O PROJETO, PRA PLATAFORMA E PRO CLIENTE, 'REVISAR O TIME ZONE' e
-                       o 'SECRET KEY'))) '''
-
-                    '''AJUSTAR OS  MINUTOS INICIAR SCHEDULER, após os testes'''
-                     
-                    '''implementar Se você usar exclusão lógica, será necessário implementar rotinas 
-                       de limpeza periódica para remover registros obsoletos do banco.'''
-
-
-                  '''ALTER ROLE seu_usuario SET timezone TO 'UTC';
-                     Ao criar o Bd Postgres -ver se vai mudar'''
 
