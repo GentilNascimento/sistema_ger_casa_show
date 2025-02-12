@@ -28,7 +28,7 @@ DATABASES = {
     'default':dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-CSRF_TRUSTED_ORIGINS = ['sistemagercasashow-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://sistemagercasashow-production.up.railway.app']
 
 # Application definition
 
