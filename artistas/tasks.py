@@ -18,7 +18,9 @@ for handler in logger.handlers:
         
 
 #URL da API da WhatsGW
-API_URL = "https://app.whatsgw.com.br/api/WhatsGw/Send/"
+API_URL = settings.WHATS_GW_URL
+apikey = settings.WHATS_GW_APIKEY
+
 
 def enviar_mensagem_whatsgw(apikey, remetente, destinatario, mensagem_id, tipo_mensagem, corpo_mensagem):
     parametros = {

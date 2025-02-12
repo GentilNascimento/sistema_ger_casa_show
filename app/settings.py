@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-WHATS_GW_APIKEY = config('WHATS_GW_APIKEY')
+WHATS_GW_URL = config('WHATS_GW_URL', default="https://app.whatsgw.com.br/api/WhatsGw/Send/")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
