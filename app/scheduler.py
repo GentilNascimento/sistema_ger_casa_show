@@ -25,13 +25,16 @@ def start_scheduler():
         from artistas.tasks import enviar_mensagens_agendadas, verificar_status
         scheduler.start()
          
-        scheduler.add_job(enviar_mensagens_agendadas, 'interval', minutes=1, id='enviar_mensagens_agendadas', replace_existing=True)
+        scheduler.add_job(enviar_mensagens_agendadas, 'interval', minutes=1, 
+                          id='enviar_mensagens_agendadas', replace_existing=True)
         
-        scheduler.add_job(verificar_status, 'interval', minutes=1, id='verificar_status', replace_existing=True)
+        scheduler.add_job(verificar_status, 'interval', minutes=1, 
+                          id='verificar_status', replace_existing=True)
  
 def scheduler_daily_message(artista_id):
     #define uma task diária p enviar msg.
     #trigger = CronTrigger(hour=9, minute=0)
     trigger = IntervalTrigger(minutes=1)
-    scheduler.add_job(enviar_mensagens_agendadas, trigger, args=[artista_id], id=f"send_message_{artista_id}", replace_existing=True)
+    scheduler.add_job(enviar_mensagens_agendadas, trigger, args=[artista_id], 
+                      id=f"send_message_{artista_id}", replace_existing=True)
      

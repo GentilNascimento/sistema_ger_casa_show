@@ -15,7 +15,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Gestão de Eventos API",
         default_version='v1',
-        description="Documentação da API para o sistema de envio de mensagens agendadas",
+        description="Documentação da API do sist de envio de msg agendadas",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="gentilrn.65@hotmail.com"),
         license=openapi.License(name="BSD License"),
@@ -31,14 +31,17 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['eventos_proximos'] = Evento.objects.filter(data__gte=datetime.now()).order_by('data')
+        context['eventos_proximos'] = Evento.objects.filter(
+            data__gte=datetime.now()).order_by('data')
         context['show_proximos_eventos'] = True
         return context
 
 
 urlpatterns = [
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), 
+         name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), 
+         name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),  #Caso esteje usando DRF
     path('admin/', admin.site.urls),  
     path('login/', login_view, name='login'),
