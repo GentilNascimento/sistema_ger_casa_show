@@ -3,6 +3,10 @@ from . import models
 from .models import Artista, Message
 
 class ArtistaForm(forms.ModelForm):
+    def clean_chave_pix(self):
+        chave = self.cleaned_data.get('chave_pix')
+        print(f"📢 Valor recebido no form: {chave}")  # Depuração
+        return chave
     class Meta:
         model = models.Artista
         fields = '__all__'

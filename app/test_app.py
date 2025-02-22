@@ -13,10 +13,10 @@ class HomeViewTests(TestCase):
         #cria um artista para teste
         self.artista = Artista.objects.create(
             nome="Artista Teste",
-            cpf="123.456.789-00",
+            cpf="12345678900",
             banco="Banco Teste",
             tipo_chave_pix="cel",
-            chave_pix="(11) 98765-4321"
+            chave_pix="11987654321"
         )
             
     def test_home_view_status_code(self):

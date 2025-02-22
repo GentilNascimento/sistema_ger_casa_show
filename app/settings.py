@@ -31,6 +31,10 @@ DATABASES = {
 
 CSRF_TRUSTED_ORIGINS = ['https://sistemagercasashow-production.up.railway.app']
 
+ENV = os.getenv("ENV", "production")  # Assume "production" como padrão
+is_testing = ENV == "testing"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +50,7 @@ INSTALLED_APPS = [
     'eventos',
     'rest_framework',
     'drf_yasg',  # para o swagger
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -123,8 +128,11 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# Default primary key field type
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -27,7 +27,6 @@ class EventoCreateView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         job_id = f"evento-{self.object.id}"
-        print(f"Job criado com ID: {job_id}")  # Log para confirmar o ID
         messages.success(self.request, 'Evento criado com sucesso!')
         return response
 

@@ -5,19 +5,19 @@ from django.utils import timezone
 from django.conf import settings
 from .models import Artista, Message
 import logging
-from app.scheduler import scheduler 
+from app.scheduler import scheduler
 import os
-import requests 
+import requests
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 for handler in logger.handlers:
     if isinstance(handler, logging.StreamHandler):
-        handler.setLevel(logging.INFO) # Suprime logs de adição de jobs, mas mantém logs importantes
-        
+        handler.setLevel(logging.INFO)  # Suprime logs de adição de jobs, mas mantém logs importantes
 
-#URL da API da WhatsGW
+
+# URL da API da WhatsGW
 API_URL = settings.WHATS_GW_URL
 apikey = settings.WHATS_GW_APIKEY
 
@@ -34,35 +34,40 @@ def enviar_mensagem_whatsgw(apikey, remetente, destinatario, mensagem_id, tipo_m
     response = requests.post(API_URL, data=parametros)
     response.raise_for_status()
     return response.json()
-    
- 
+
  # Função para enviar mensagens agendadas
 def enviar_mensagens_agendadas():
     agora = timezone.now()
-    artistas = Artista.objects.all()
-    apikey = settings.WHATS_GW_APIKEY
-    
-    for artista in artistas:
-        messages = Message.objects.filter(artista=artista, send_date__lte=agora, sent=False)
-         
-        for message in messages:
-            try:
-                # Verifica e envia a msg usando WhatsGW
+    mensagens_pendentes = Message.objects.filter(artista__isnull=False, send_date__lte=agora, sent=False)
+
+    if mensagens_pendentes:
+ 
+        artistas = Artista.objects.all()
+        apikey = settings.WHATS_GW_APIKEY
+
+        for artista in artistas:
+            messages = Message.objects.filter(artista=artista, send_date__lte=agora, sent=False)
+            for message in messages:
                 if message.deve_enviar():
-                    remetente = "5548996269951" #num confg na API msg
-                    destinatario = artista.telefone
-                    mensagem_id = f"msg-{message.id}"
-                    tipo_mensagem = "text"
-                    corpo_mensagem = message.conteudo
-                    enviar_mensagem_whatsgw(apikey, remetente, destinatario, mensagem_id, tipo_mensagem, corpo_mensagem)
-                    message.enviar()   
-                    
-            except requests.exceptions.RequestException as e:
-                logger.error(f"Erro na API WhatsGW para mensagem {message.id}: {e}")
-            except Exception as e:                 
-                logger.error(f"Erro ao enviar mensagem {message.id} para o artista {artista.id}: {e}")  
-                
-               
+                    try:
+                        remetente = "5548996269951"
+                        destinatario = artista.telefone
+                        mensagem_id = f"msg-{message.id}"
+                        tipo_mensagem = "text"
+                        corpo_mensagem = message.conteudo
+
+                        # Tenta enviar a mensagem
+                        enviar_mensagem_whatsgw(apikey, remetente, destinatario, mensagem_id, tipo_mensagem, corpo_mensagem)
+
+                        message.enviar()
+ 
+                    except requests.exceptions.RequestException as e:
+                        logger.error(f"Erro na API WhatsGW para mensagem {message.id}: {e}")
+                    except Exception as e:
+
+                        logger.error(f"Erro ao enviar mensagem {message.id} para o artista {artista.id}: {e}")
+
+
 def monitorar_mensagens():
     messages = Message.objects.filter(sent=False)
     agora = timezone.now()
@@ -71,7 +76,7 @@ def monitorar_mensagens():
         if message.send_date <= agora and not message.sent:
             try:
                 enviar_mensagens_agendadas()
-                
+
             except Exception as e:
                 logger.error(f"Erro ao tentar enviar mensagem {message.id}: {e}")
                 message.refresh_from_db()
@@ -92,11 +97,10 @@ def verificar_status():
             if message.deve_ser_atualizado():
                 message.atualizar_status()
                 message.save()
-                
- 
+
+
 def iniciar_scheduler():
-    # Verifica se o sistema está em modo de 
-      
+ 
     is_testing = os.environ.get("PYTEST_CURRENT_TEST", None) is not None
 
     # Adiciona os jobs com intervalos ajustados para testes ou produção
@@ -106,5 +110,3 @@ def iniciar_scheduler():
     # Inicia o scheduler
     scheduler.start()
     logger.info("APScheduler iniciado para tarefas de mensagens e verificação de status.")
-     
- 
