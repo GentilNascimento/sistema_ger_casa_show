@@ -9,7 +9,7 @@ from unittest.mock import patch
 def artista():
     return Artista.objects.create(
         nome="Event Artist",
-        cpf="12345678900",
+        cpf="36103764491",
         telefone="+5511987654321",
         banco="Test Bank",
         tipo_chave_pix="cel",

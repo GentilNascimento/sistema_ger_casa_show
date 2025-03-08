@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5" style="background-color: #6ACFC9;">
     <div class="row mb-4">
         <div class="col-md-12">
             <h2 class="mb-4">Lista de Mensagens</h2>
@@ -40,9 +40,9 @@
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
-            <a href="{% url 'criar_mensagem' artista.id %}" class="btn btn-primary btn-sm">Criar Nova Mensagem</a>
-            <a href="{% url 'artistas_list' %}" class="btn btn-secondary btn-sm custom-back-button">Voltar para lista</a> 
+            </table>           
+            <a href="{% url 'criar_mensagem' artista.id %}" class="btn btn-primary mb-1">Criar Nova Mensagem</a>
+            <a href="{% url 'artistas_list' %}" class="btn btn-secondary mb-1">Voltar para lista</a> 
         </div>
     </div>
 </div>

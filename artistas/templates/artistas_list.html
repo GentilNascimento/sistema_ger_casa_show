@@ -29,10 +29,12 @@
                         <td>{{ artista.chave_pix }}</td>                        
                         <td>
                             <div class="btn-group" role="group">
-                                <!-- <a href="{% url 'artista_update' artista.id %}" class="btn btn-warning btn-sm">Editar</a> -->
                                 <form method="post" action="{% url 'artista_delete' artista.id %}" style="display: inline;">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>                                  
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Tem certeza de que deseja excluir este artista? Esta ação não pode ser desfeita!');">
+                                        Excluir
+                                    </button>                                  
                                 </form> 
                                 <a href="{% url 'artista_detail' artista.id %}" class="btn btn-secondary btn-sm">Detalhes</a>
                                 <a href="{% url 'lista_mensagens' artista.id %}" class="btn btn-primary btn-sm">Mensagens</a>

@@ -22,9 +22,9 @@
 
                         <div class="form-group">
                             <label for="{{ form.data.id_for_label }}" class="font-weight-bold">Data:</label>
-                            {{ form.data }}
+                            {{ form.scheduled_date }}
                             <div class="text-danger">
-                                {{ form.data.errors }}
+                                {{ form.scheduled_date.errors }}
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
                             <input type="submit" class="btn btn-success btn-block" value="Salvar Alterações">
                         </div>
                     </form>
-                    <a href="{% url 'evento_detail' evento.id %}" class="btn btn-secondary">Cancelar</a>
+                    <a href="{% url 'evento_list' %}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>
         </div>

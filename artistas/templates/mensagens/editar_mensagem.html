@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5" style="background-color:#213500; ">
     <div class="row mb-4">
         <div class="col-md-12">
             <h2>Editar Mensagem</h2>
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                
+                <div class="form-group">
+                    <label for="{{ form.conteudo.id_for_label }}">Conteúdo:</label>
+                    {{ form.conteudo }}
+                    <div class="text-danger">
+                        {{ form.conteudo.errors }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.send_date.id_for_label }}">Data de Envio:</label>
+                    <input type="datetime-local" id="{{ form.send_date.id_for_label }}" name="{{ form.send_date.html_name }}" 
+                        class="form-control" min="1000-01-01T00:00" max="9999-12-31T23:59" value="{{ form.send_date.value }}">
+                    <div class="text-danger">
+                        {{ form.send_date.errors }}
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-success">Salvar Alterações</button>
             </form>
             <a href="{% url 'lista_mensagens' mensagem.artista.id %}" class="btn btn-secondary">Voltar para Lista de Mensagens</a>
@@ -15,3 +31,8 @@
     </div>
 </div>
 {% endblock %}
+
+
+
+
+

@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 import re 
 from validate_docbr import CPF
+
  
  
 logger = logging.getLogger('artistas')
@@ -25,7 +26,16 @@ class Artista(models.Model):
     chave_pix = models.CharField(max_length=100)
     email = models.EmailField(max_length=254, unique=True, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    
+    def validar_cpf(self):
+        cpf_validator = CPF()
+        if not cpf_validator.validate(self.cpf):
+            raise ValidationError("CPF inválido.")
+    
+    def validar_email(self):
+        if self.email and not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', self.email):
+            raise ValidationError("E-mail inválido.")
+        
     def validar_chave_pix(self):
         if self.chave_pix:
             if self.tipo_chave_pix == 'cel':
@@ -40,6 +50,8 @@ class Artista(models.Model):
                     raise ValidationError("A chave Pix deve ser um CPF válido com 11 dígitos.")
 
     def clean(self):
+        self.validar_cpf()
+        self.validar_email()
         self.validar_chave_pix()
 
     def save(self, *args, **kwargs):
@@ -54,7 +66,7 @@ class Artista(models.Model):
     """
     def deve_ser_atualizado(self):
         if self.tipo_chave_pix == 'email':
-            campos_obrigatorios = [self.telefone, self.email]
+            campos_obrigatorios = [self.telefone, self.chave_pix]
         else:
             campos_obrigatorios = [self.telefone]
             

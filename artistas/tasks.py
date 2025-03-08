@@ -38,7 +38,11 @@ def enviar_mensagem_whatsgw(apikey, remetente, destinatario, mensagem_id, tipo_m
  # Função para enviar mensagens agendadas
 def enviar_mensagens_agendadas():
     agora = timezone.now()
-    mensagens_pendentes = Message.objects.filter(artista__isnull=False, send_date__lte=agora, sent=False)
+    mensagens_pendentes = Message.objects.filter(
+        artista__isnull=False,
+        send_date__lte=timezone.now(), 
+        sent=False
+    )
 
     if mensagens_pendentes:
  
@@ -73,7 +77,7 @@ def monitorar_mensagens():
     agora = timezone.now()
 
     for message in messages:
-        if message.send_date <= agora and not message.sent:
+        if message.send_date <= timezone.now() and not message.sent:
             try:
                 enviar_mensagens_agendadas()
 

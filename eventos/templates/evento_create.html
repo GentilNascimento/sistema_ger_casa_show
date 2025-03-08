@@ -2,6 +2,16 @@
 
 {% block content %}
     <div class="container">
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}       
+            </div>
+        {% endif%}
+
         <h1 class="my-4">Cadastrar Novo Evento</h1>
         <div class="card">
             <div class="card-body">
@@ -12,11 +22,6 @@
                         <label for="{{ form.artista.id_for_label }}">Artista:</label>
                         {{ form.artista }}
                     </div>
-
-                    <!-- <div class="form-group">
-                        <label for="{{ form.data.id_for_label }}">Data:</label>
-                        {{ form.data }}
-                    </div> -->
 
                     <div class="form-group">
                         <label for="{{ form.scheduled_date.id_for_label }}">Data Agendada:</label>

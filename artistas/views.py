@@ -15,6 +15,7 @@ from .serializers import ArtistaSerializer, MessageSerializer
 from .tasks import enviar_mensagens_agendadas, verificar_status, monitorar_mensagens
 import logging 
 from django.db import IntegrityError
+
  
 
 logger = logging.getLogger(__name__)
@@ -41,8 +42,7 @@ class ArtistaCreateView(CreateView):
     model = Artista
     template_name = 'artista_create.html'
     form_class = forms.ArtistaForm
-    success_url = reverse_lazy('artistas_list')
-    
+     
     def form_valid(self, form):
         try:
             logger.debug(f"Dados do formulário: {form.cleaned_data}") 
@@ -51,15 +51,14 @@ class ArtistaCreateView(CreateView):
                 self.request,
                 f'Artista "{self.object.nome}" criado com sucesso em {self.object.created_at.strftime("%d/%m/%Y %H:%M:")}!'
             )
-            return super().form_valid(form)
-        except IntegrityError as e:
+            return redirect('artista_create')        
+        except IntegrityError:
             messages.error(self.request, 'Erro: CPF ou Email já cadastrados.')
             return self.render_to_response(self.get_context_data(form=form))
     
     def form_invalid(self, form):  
         messages.error(self.request, 'Erro ao criar artista. Verifique os dados e tente novamente.')
-        return self.render_to_response(self.get_context_data(form=form))
-    
+        return redirect('artista_create')
 class ArtistaDetailView(DetailView):
     model = Artista
     template_name = 'artista_detail.html'
@@ -80,25 +79,32 @@ class ArtistaDeleteView(DeleteView):
     
 def criar_mensagem(request, pk):
     artista = get_object_or_404(Artista, pk=pk)
+    
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
-            message = form.save(commit=False)
-            message.artista = artista           
             try:
-                message.save() #tenta salvar msg                    
-                messages.success(request, 'Mensagem criada com sucesso!')#msg de sucesso
+                message = form.save(commit=False)
+                message.artista = artista           
+                message.save()  # Salva a mensagem no banco
                 logger.info(f"Mensagem {message.id} criada e agendada para envio.")
-                return redirect('lista_mensagens', pk=artista.id)
-            except Exception as e:   #captura qualquer exceção
-                logger.error(f"Erro ao criar e agendar mensagem {message.id}: {str(e)}")
-                messages.error(request, 'Erro ao criar a mensagem. Tente novamente.') #msg de erro
+
+                messages.success(request, 'Mensagem criada com sucesso!')  # Exibe a mensagem
+
+                return redirect('criar_mensagem', pk=artista.id)  
+
+            except Exception as e:  
+                logger.error(f"Erro ao criar e agendar mensagem: {str(e)}")
+                messages.error(request, 'Erro ao criar a mensagem. Tente novamente.')
         else:
-            messages.error(request, 'Erro nos dados do formulário. Verifique e tente novamente.') #Msg de erro no form
+            messages.error(request, 'Erro nos dados do formulário. Verifique e tente novamente.')
+    
     else:
         form = MessageForm()
+    
     return render(request, 'mensagens/criar_mensagem_para_artista.html', {'form': form, 'artista': artista})
-   
+    
+
 def lista_mensagens(request, pk):
     artista = get_object_or_404(Artista, pk=pk)
     mensagens = Message.objects.filter(artista=artista)  

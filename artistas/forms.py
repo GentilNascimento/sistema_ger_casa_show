@@ -1,11 +1,12 @@
 from django import forms
 from . import models
 from .models import Artista, Message
+from django.utils.timezone import now
+
 
 class ArtistaForm(forms.ModelForm):
     def clean_chave_pix(self):
         chave = self.cleaned_data.get('chave_pix')
-        print(f"📢 Valor recebido no form: {chave}")  # Depuração
         return chave
     class Meta:
         model = models.Artista
@@ -22,7 +23,8 @@ class ArtistaForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     send_date = forms.DateTimeField(
         input_formats=['%Y-%m-%dT%H:%M:'],
-        widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'})
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+        initial=now
     )
     class Meta:
         model = Message

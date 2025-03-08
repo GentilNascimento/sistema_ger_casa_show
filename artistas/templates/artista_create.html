@@ -12,7 +12,7 @@
         </div>
     {% endif%}
     <h1 class="mb-4 text-center">Cadastrar Artista</h1>
-    <div class="card mx-auto" style="max-width: 600px;">
+    <div class="card mx-auto" style="max-width: 600px; background-color: #213500; border-radius: 8px">
         <div class="card-body">
             <form class="form-custom" method="post">
                 {% csrf_token %}
@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="id_telefone" class="form-label">Telefone</label>
-                    <input type="text" class="form-control" id="id_telefone" name="telefone" maxlength="15">
+                    <input type="tel" class="form-control" id="id_telefone" name="telefone" maxlength="20">
                 </div>
                 <div class="mb-3">
                     <label for="id_banco" class="form-label">Banco</label>

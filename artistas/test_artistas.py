@@ -196,10 +196,10 @@ def test_validar_chave_pix_cpf():
         nome="Artista Teste",
         telefone="+5548996269951",
         email="teste@email.com",
-        cpf="36103764491",
+        cpf="12345678900", #no teste foi usado núm válido
         banco="Banco Teste",
         tipo_chave_pix="cpf",
-        chave_pix="36103764491"
+        chave_pix="12345678900" #no teste foi usado chave válida
     )
     
     try:

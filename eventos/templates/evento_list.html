@@ -12,6 +12,7 @@
                         <tr>
                             <th>Artista</th>
                             <th>Data</th>
+                            <th>Data Agendada</th>
                             <th>Horário</th>
                             <th>Descrição</th>
                             <th>Ações</th>
@@ -21,13 +22,13 @@
                         {% for evento in eventos %}
                             <tr>
                                 <td>{{ evento.artista.nome }}</td>
-                                <td>{{ evento.data }}</td> 
+                                <td>{{ evento.data }}</td>
+                                <td>{{ evento.scheduled_date }}</td> 
                                 <td>{{ evento.horario }}</td>
                                 <td>{{ evento.descricao }}</td>
                                 <td>
                                     {% if user.is_authenticated %}
                                     <div class="btn-group" role="group">
-                                        <a href="{% url 'evento_detail' evento.id %}" class="btn btn-info btn-sm">Detalhes</a>
                                         <a href="{% url 'evento_update' evento.id %}" class="btn btn-warning btn-sm">Editar</a>
                                         <a href="{% url 'evento_delete' evento.id %}" class="btn btn-danger btn-sm">Excluir</a>
                                     </div>

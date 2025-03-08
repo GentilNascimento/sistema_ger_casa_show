@@ -24,7 +24,6 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Login realizado com sucesso!')
                 return redirect('evento_list')  # Redireciona para a lista de eventos após login
             else:
                 messages.error(request, 'Usuário ou senha inválidos.')
@@ -37,4 +36,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('evento_list')
+    return redirect('home')
