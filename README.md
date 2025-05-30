@@ -1,4 +1,4 @@
-✌️Nome do Projeto: APP (Sistema de gerenciamento casa de shows)
+✌️Nome do Projeto: APP (Sistema web de gerenciamento casa de shows)
 
 -Criamos um controle de cadastro de pessoas, com os campos de: 
 'nome','cpf', 'telefone', 'banco', 'chave pix', 'tipo chave'.
