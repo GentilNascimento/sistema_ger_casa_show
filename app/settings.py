@@ -23,17 +23,21 @@ WHATS_GW_APIKEY = config('WHATS_GW_APIKEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sistemagercasashow-production.up.railway.app', 
-                 'sistema-ger-casa-show.onrender.com',
-                 'localhost', 
-                 '127.0.0.1']
+ALLOWED_HOSTS = [
+ 'sistemagercasashow-production.up.railway.app', 
+ 'sistema-ger-casa-show.onrender.com',
+ 'localhost', 
+ '127.0.0.1',
+]
 
 DATABASES = {
     'default':dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-CSRF_TRUSTED_ORIGINS = ['https://sistemagercasashow-production.up.railway.app',
-                       'https://sistema-ger-casa-show.onrender.com']
+CSRF_TRUSTED_ORIGINS = [
+ 'https://sistemagercasashow-production.up.railway.app',
+ 'https://sistema-ger-casa-show.onrender.com',
+]
 
 ENV = os.getenv("ENV", "production")  # Assume "production" como padrão
 is_testing = ENV == "testing"
