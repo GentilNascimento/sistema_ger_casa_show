@@ -141,8 +141,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+WHITENOISE_MANIFEST_STRICT = False  # Evita erros 500 se arquivos estáticos estiverem faltando
+
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # configuração do 'APScheduler'
