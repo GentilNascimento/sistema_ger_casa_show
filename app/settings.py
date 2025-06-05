@@ -21,7 +21,7 @@ WHATS_GW_URL = config('WHATS_GW_URL', default="https://app.whatsgw.com.br/api/Wh
 WHATS_GW_APIKEY = config('WHATS_GW_APIKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
  'sistemagercasashow-production.up.railway.app', 
