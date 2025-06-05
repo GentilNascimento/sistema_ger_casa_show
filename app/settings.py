@@ -30,8 +30,14 @@ ALLOWED_HOSTS = [
  '127.0.0.1',
 ]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 DATABASES = {
-    'default':dj_database_url.config(default=config('DATABASE_URL'))
+    'default':dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 CSRF_TRUSTED_ORIGINS = [
