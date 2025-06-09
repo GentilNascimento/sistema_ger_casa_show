@@ -20,7 +20,7 @@ for handler in logger.handlers:
         handler.addFilter(JobAddedFilter())  # Suprime logs de adição de jobs
 
 
-scheduler = BackgroundScheduler(timezone=timezone("America/Sao_Paulo")))
+scheduler = BackgroundScheduler(timezone=timezone("America/Sao_Paulo"))
 
 
 def start_scheduler():
