@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from pytz import timezone
 from apscheduler.triggers.interval import IntervalTrigger
 import logging
 
@@ -19,7 +20,7 @@ for handler in logger.handlers:
         handler.addFilter(JobAddedFilter())  # Suprime logs de adição de jobs
 
 
-scheduler = BackgroundScheduler()
+scheduler = BackgroundScheduler(timezone=timezone("America/Sao_Paulo")))
 
 
 def start_scheduler():
