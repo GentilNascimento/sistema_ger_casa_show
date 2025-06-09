@@ -17,18 +17,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-WHATS_GW_URL = config('WHATS_GW_URL', default="https://app.whatsgw.com.br/api/WhatsGw/Send/")
+WHATS_GW_URL = config('WHATS_GW_URL')
 WHATS_GW_APIKEY = config('WHATS_GW_APIKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
- 'sistemagercasashow-production.up.railway.app', 
- 'sistema-ger-casa-show.onrender.com',
- 'localhost', 
- '127.0.0.1',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -40,10 +35,7 @@ DATABASES = {
     )
 }
 
-CSRF_TRUSTED_ORIGINS = [
- 'https://sistemagercasashow-production.up.railway.app',
- 'https://sistema-ger-casa-show.onrender.com',
-]
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
 
 ENV = os.getenv("ENV", "production")  # Assume "production" como padrão
 is_testing = ENV == "testing"
