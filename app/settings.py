@@ -17,19 +17,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-WHATS_GW_URL = config('WHATS_GW_URL', default="https://app.whatsgw.com.br/api/WhatsGw/Send/")
+WHATS_GW_URL = config('WHATS_GW_URL')
 WHATS_GW_APIKEY = config('WHATS_GW_APIKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sistemagercasashow-production.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DATABASES = {
-    'default':dj_database_url.config(default=config('DATABASE_URL'))
+    'default':dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
-CSRF_TRUSTED_ORIGINS = ['https://sistemagercasashow-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS').split(',')
 
 ENV = os.getenv("ENV", "production")  # Assume "production" como padrão
 is_testing = ENV == "testing"
@@ -133,8 +139,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+WHITENOISE_MANIFEST_STRICT = False  # Evita erros 500 se arquivos estáticos estiverem faltando
+
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # configuração do 'APScheduler'
