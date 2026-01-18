@@ -175,7 +175,14 @@
         background-color: #213500 !important; 
         color: white; 
         border-radius: 8px;
-        }      
+        }
+        
+        .dh-logo {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -227,7 +234,7 @@
     <div class="container container-custom mt-4">
         <div class="welcome-banner">
             <h3 class="bem-vindo-text">Bem-vindo ao Casting Artístico!</h3>
-            <img src="{% static 'rest_framework/img/dh.png' %}" alt="Logo" class="img-fluid d-block mx-auto img-arredondada" style="max-width:600px;">
+            <img src="{% static 'rest_framework/img/dh.png' %}" alt="Logo" class="img-fluid d-block mx-auto img-arredondada dh-logo">
         </div>            
     </div>
     {% endif %} 
